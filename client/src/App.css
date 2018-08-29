@@ -1,0 +1,22 @@
+html, body {
+  margin:0;
+  padding: 0;
+}
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.App {
+  margin: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+input {
+  border: none;
+}

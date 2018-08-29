@@ -1,0 +1,26 @@
+
+.notecard-container {
+  width: 33%;
+  float: left;
+  position: relative;
+  padding: 10px;
+  box-sizing: border-box;
+  height: 300px;
+}
+
+.notecard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 90%;
+  width: 90%;
+  border: #c7baba solid 1px;
+  border-radius: 3px;
+  background-color: beige;
+  box-shadow: 0px 1px 4px 2px lightgrey;
+}
+
+.notecard:hover {
+  box-shadow: 0px 1px 20px 1px #848080;
+}

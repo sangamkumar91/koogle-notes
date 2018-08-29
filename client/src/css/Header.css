@@ -1,0 +1,52 @@
+.header {
+  z-index: 10;
+  background: #fb0;
+  height: 50px;
+  padding: 5px;
+  position:fixed;
+  width: 100%;
+  box-shadow: 0 3px 11px 0px grey;
+}
+
+.header-content {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+.header-app-title{
+  display: inline-block;
+  vertical-align: middle;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: monospace;
+  width: 10%;
+  margin-left: 20px;
+}
+
+.header-app-category{
+  display: inline-block;
+  vertical-align: middle;
+
+  color: white;
+  font-size: 30px;
+  font-family: monospace;
+  width: 10%;
+  margin-left: 20px;
+}
+
+.header-search-bar{
+  display: inline-block;
+  vertical-align: middle;
+
+  margin-left: 30px;
+  padding-left: 25px;
+  height: 45px;
+  width: 50%;
+  vertical-align: middle;
+  border-radius: 25px;
+  font-size: 20px;
+  color: gray;
+}
