@@ -3,6 +3,11 @@ import "./../css/Pinboard.css";
 import Notecard from "./Notecard.js"
 
 class Pinboard extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
   render(){
     return(
       <div className="pinboard">
