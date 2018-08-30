@@ -40,6 +40,7 @@
 .header-search-bar{
   display: inline-block;
   vertical-align: middle;
+  background: #ffde81;
 
   margin-left: 30px;
   padding-left: 25px;

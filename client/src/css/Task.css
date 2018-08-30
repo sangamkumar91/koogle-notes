@@ -1,0 +1,17 @@
+.task-input{
+  font-size: 15px;
+  color: black;
+  padding-left: 30px;
+  padding-top: 5px;
+  font-family: sans-serif;
+}
+.task {
+  position: relative;
+  padding: 5px;
+}
+.task-complete{
+  padding:5px;
+  top: 3px;
+  position: absolute;
+  left:0;
+}

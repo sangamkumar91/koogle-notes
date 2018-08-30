@@ -19,8 +19,49 @@
   border-radius: 3px;
   background-color: beige;
   box-shadow: 0px 1px 4px 2px lightgrey;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.note-checkbox{
+  position: absolute;
+    top: -10px;
+    left: -10px;
+    display: none;
 }
 
 .notecard:hover {
   box-shadow: 0px 1px 20px 1px #848080;
+}
+
+.notecard:hover .note-checkbox{
+  display: block;
+}
+
+.note-checkbox:hover .checked .checked-note{
+  display: block;
+}
+
+.note-checkbox:hover .unchecked-note{
+  display: block;
+}
+
+
+.note-title{
+  padding: 5px;
+  font-size: 15px;
+  font-weight: 600;
+  color: black;
+  font-family: sans-serif;
+}
+
+.task-list{
+  margin-top: 10px;
+}
+
+.add-task-button{
+  padding:5px;
+}
+.add-task-button i {
+  color: #868383;
 }
