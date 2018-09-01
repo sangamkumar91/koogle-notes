@@ -1,0 +1,69 @@
+.add-note-container{
+  background: #febb00;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    border-radius: 40px;
+    color: white;
+}
+
+.add-note-container.no-msg{
+  background: #ffde81;
+    height: 70%;
+    width: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.add-note-container.no-msg:hover{
+  background: #febb00;
+}
+
+.add-note-icon{
+
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+}
+.no-msg .add-note-icon{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+}
+.no-msg .add-note-icon .material-icons{
+  font-size: 50px;
+  color:white;
+}
+.add-note-icon .material-icons{
+
+  font-size: 150px;
+  color:white;
+
+}
+
+.welcome-msg{
+  position: absolute;
+     font-size: 50px;
+     font-family: sans-serif;
+     font-weight: bold;
+     top: 55%;
+     left: 50%;
+     transform: translateX(-50%);
+}
+
+.add-note-msg{
+  position: absolute;
+     font-size: 20px;
+     font-family: sans-serif;
+     font-weight: bold;
+     top: 75%;
+     left: 50%;
+     transform: translateX(-50%);
+
+}

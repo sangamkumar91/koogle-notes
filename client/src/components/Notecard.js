@@ -3,7 +3,30 @@ import "./../css/Notecard.css";
 import Task from "./Task.js";
 
 class Notecard extends Component{
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      taskList: props.taskList
+    };
+  }
+
+  addTask(){
+    const {
+      taskList
+    } = this.state;
+    taskList.push({
+      value: ''
+    });
+    this.setState({
+      taskList
+    });
+  }
+
   render(){
+    const {
+      taskList
+    } = this.state;
     return(
       <div className="notecard-container">
         <div className="notecard">
@@ -11,13 +34,12 @@ class Notecard extends Component{
             <i className="material-icons font-large checked-note">check_circle</i>
             <i className="material-icons font-large unchecked-note">check_circle_outline</i>
           </div>
-          <div contenteditable="true" className="note-title" placeholder="Title"/>
+          <div contentEditable="true" className="note-title" placeholder="Title"/>
           <div className="task-list">
-            <Task/>
-            <Task/>
-            <Task/>
-            <Task/>
-            <button className="add-task-button">
+            {
+              taskList.map((task,index) => <Task key={"key-"+index} task={task}/>)
+            }
+            <button className="add-task-button" onClick={e => this.addTask(e)}>
               <i className="material-icons font-large">add_box</i>
               <span className="font-large"></span>
             </button>
