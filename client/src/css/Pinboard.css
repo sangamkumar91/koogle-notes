@@ -1,15 +1,16 @@
 .pinboard {
-  padding-top: 100px;
   z-index: 1;
   background: #eae7e7;
   position: fixed;
   height: 100%;
   width: 100%;
+  overflow: auto;
 }
 
 .notecard-list{
   width: 1040px;
   margin: auto;
+  margin-top: 100px;
 }
 
 .add-note-wrapper-empty{
