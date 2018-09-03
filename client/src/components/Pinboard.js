@@ -14,6 +14,15 @@ class Pinboard extends Component{
     this.fetchNotes();
   }
 
+  async addNote(){
+    const resp = await fetch('http://localhost:8080/addNote');
+    const dataPromise = await resp.json();
+    const payload = await dataPromise;
+    this.setState({
+      notes: Object.values(payload)
+    });
+  }
+
   async fetchNotes(){
     const resp = await fetch('http://localhost:8080/notes');
     const dataPromise = await resp.json();
@@ -23,29 +32,17 @@ class Pinboard extends Component{
     });
   }
 
-  addNote(){
-    const {
-      notes
-    } = this.state;
-    notes.push({
-      taskList: []
-    });
-    this.setState({
-      notes
-    });
-  }
-
   renderNotes(){
     const {
       notes
     } = this.state;
 
     if (notes.length) {
-      const notesList = notes.map((note, index) => <Notecard key={`note-${index}`} taskList={note.taskList} />);
+      const notesList = notes.map((note, index) => <Notecard key={`note-${index}`} taskList={note.taskList} noteId = {note.noteId} />);
       notesList.push(<div key="add-list" className="add-note-wrapper"><AddNote showMsg={false} addNote={e => this.addNote(e)}/></div>);
       return notesList;
     } else {
-      return <div className="add-note-wrapper-empty"><AddNote showMsg={true} onClick={e => this.addNote(e)}/></div>;
+      return <div className="add-note-wrapper-empty"><AddNote showMsg={true} addNote={e => this.addNote(e)}/></div>;
     }
   }
 

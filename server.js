@@ -16,81 +16,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-const notes ={
-	"111-6290-1148-7975" : {
-	    "title": "",
-	    "noteId": "111-6290-1148-7975",
-	    "taskList": [
-	        {
-	            "value": "dshjahb",
-	            "done": false,
-	            "noteId": "111-6290-1148-7975"
-	        },
-	        {
-	            "value": "dsknanajn",
-	            "done": false,
-	            "noteId": "111-6290-1148-7975"
-	        },
-	        {
-	            "value": "task3",
-	            "done": false,
-	            "noteId": "111-6290-1148-7975"
-	        },
-	        {
-	            "value": "task4",
-	            "done": false,
-	            "noteId": "111-6290-1148-7975"
-	        },
-	        {
-	            "value": "task5",
-	            "done": false,
-	            "noteId": "111-6290-1148-7975"
-	        },
-	        {
-	            "value": "task6",
-	            "done": false,
-	            "noteId": "111-6290-1148-7975"
-	        }
-	    ]
-	} ,
-	"111-6290-1148-7976" : {
-			"title": "",
-			"noteId": "111-6290-1148-7976",
-			"taskList": [
-					{
-							"value": "dshjahb",
-							"done": false,
-							"noteId": "111-6290-1148-7976"
-					},
-					{
-							"value": "dsknanajn",
-							"done": false,
-							"noteId": "111-6290-1148-7976"
-					},
-					{
-							"value": "task3",
-							"done": false,
-							"noteId": "111-6290-1148-7976"
-					},
-					{
-							"value": "task4",
-							"done": false,
-							"noteId": "111-6290-1148-7976"
-					},
-					{
-							"value": "task5",
-							"done": false,
-							"noteId": "111-6290-1148-7976"
-					},
-					{
-							"value": "task6",
-							"done": false,
-							"noteId": "111-6290-1148-7976"
-					}
-			]
-	}
-
-};
+const notes = {};
 
 function random() {
 	return Math.floor(Math.random() * 10000);
@@ -133,17 +59,17 @@ class Task {
 	}
 }
 
-app.get('/addTask/:text/:noteId', function(req, res) {
+app.get('/addTask/:noteId', function(req, res) {
 	const noteId = req.params.noteId;
-	const text = req.params.text;
+	const text = '';
 	const note = notes[req.params.noteId];
 	note.addTask(text);
-	res.json(notes);
+	res.json(note);
 });
 
-app.get('/updateNote/:title/:noteId', function(req, res) {
+app.get('/updateNote/:noteId/:title', function(req, res) {
 	const noteId = req.params.noteId;
-	const title = req.params.title;
+	const title = req.params.title == 'null' ? req.params.title : '' ;
 	const note = notes[noteId];
 	note.title = title;
 	res.json(notes);
@@ -160,17 +86,20 @@ app.get('/deleteTask/:taskIndex/:noteId', function(req, res) {
 	const taskIndex = req.params.taskIndex;
 	const task = notes[noteId].taskList[parseInt(taskIndex)];
 	task.delete();
-	res.json(notes);
+	const note = notes[req.params.noteId];
+	res.json(note);
 });
 
-app.get('/updateTask/:text/:taskIndex/:noteId/:status', function(req, res) {
+app.get('/updateTask/:taskIndex/:noteId/:status/:text', function(req, res) {
 	const noteId = req.params.noteId;
 	const status = !!parseInt(req.params.status);
 	const taskIndex = req.params.taskIndex;
-	const text = req.params.text;
+	const text = req.params.text !== 'null' ? req.params.text : '' ;
 	const task = notes[noteId].taskList[parseInt(taskIndex)];
 	task.updateTask(text, status);
-	res.json(notes);
+	console.log(task.value);
+	const note = notes[req.params.noteId];
+	res.json(note);
 });
 
 app.get('/addNote', function(req, res) {

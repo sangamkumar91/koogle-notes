@@ -11,7 +11,13 @@
 }
 .task-complete{
   padding:5px;
-  top: 3px;
+  top: 5px;
   position: absolute;
   left:0;
+}
+
+.task-delete{
+  top: 5px;
+  position: absolute;
+  right:0;
 }
