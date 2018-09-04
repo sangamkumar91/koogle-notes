@@ -2,10 +2,6 @@ import React, { Component} from "react";
 import "./../css/Notecard.css";
 import Task from "./Task.js";
 
-async function addNewTasks(){
-
-}
-
 class Notecard extends Component{
 
   constructor(props) {

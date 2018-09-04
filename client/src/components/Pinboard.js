@@ -6,9 +6,6 @@ import AddNote from "./AddNote.js"
 class Pinboard extends Component{
   constructor(props) {
     super(props);
-    this.state = {
-      notes: []
-    };
   }
   componentDidMount() {
     this.fetchNotes();
@@ -44,7 +41,7 @@ class Pinboard extends Component{
   renderNotes(){
     const {
       notes
-    } = this.state;
+    } = Object.values(this.props.notes);
 
     if (notes.length) {
       const notesList = notes.map((note, index) =>
