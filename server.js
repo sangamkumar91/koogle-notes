@@ -31,7 +31,7 @@ class Note {
 	}
 
 	static delete(noteId){
-		notes.remove(noteId);
+		delete notes[noteId];
 	}
 
 	addTask(value){
@@ -97,7 +97,6 @@ app.get('/updateTask/:taskIndex/:noteId/:status/:text', function(req, res) {
 	const text = req.params.text !== 'null' ? req.params.text : '' ;
 	const task = notes[noteId].taskList[parseInt(taskIndex)];
 	task.updateTask(text, status);
-	console.log(task.value);
 	const note = notes[req.params.noteId];
 	res.json(note);
 });

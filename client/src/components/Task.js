@@ -7,6 +7,7 @@ class Task extends Component{
     this.state = {
       task : this.props.task
     }
+    this.inputDiv = React.createRef();
   }
 
   changeValue(e){
@@ -15,8 +16,14 @@ class Task extends Component{
     this.setState({
       task
     })
-    //this.props.editTask(this.props.taskIndex,0,task.value || task.value !== '' ? task.value : 'null');
+    this.props.editTask(this.props.taskIndex,0,task.value || task.value !== '' ? task.value : 'null');
   }
+
+  shouldComponentUpdate(nextProps, nextState){
+    const inputDiv = this.inputDiv.current;
+    return nextState.task.value !== inputDiv.innerHTML
+  }
+
 
 
   render(){
@@ -36,11 +43,12 @@ class Task extends Component{
         </button>
         <div
           contentEditable="true"
+          ref={this.inputDiv}
           suppressContentEditableWarning="true"
           type="text"
           className="task-input"
           placeholder="..."
-          onKeyUp={(e) => this.changeValue(e)}
+          onBlur={(e) => this.changeValue(e)}
         >
           {task.value}
         </div>

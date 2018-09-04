@@ -2,6 +2,7 @@
   font-size: 15px;
   color: black;
   padding-left: 30px;
+  padding-right: 30px;
   padding-top: 5px;
   font-family: sans-serif;
 }
@@ -17,7 +18,14 @@
 }
 
 .task-delete{
+  color: #858383;
+  padding:5px;
   top: 5px;
   position: absolute;
   right:0;
+  display:none;
+}
+
+.task:hover .task-delete{
+  display:block;
 }

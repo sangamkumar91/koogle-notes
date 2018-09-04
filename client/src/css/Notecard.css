@@ -23,29 +23,21 @@
   box-sizing: border-box;
 }
 
-.note-checkbox{
+.note-delete{
+  color: #858383;
   position: absolute;
-    top: -10px;
-    left: -10px;
-    display: none;
+  top: -15px;
+  left: -15px;
+  display: none;
 }
 
 .notecard:hover {
   box-shadow: 0px 1px 20px 1px #848080;
 }
 
-.notecard:hover .note-checkbox{
+.notecard:hover .note-delete{
   display: block;
 }
-
-.note-checkbox:hover .checked .checked-note{
-  display: block;
-}
-
-.note-checkbox:hover .unchecked-note{
-  display: block;
-}
-
 
 .note-title{
   padding: 5px;
