@@ -1,61 +1,37 @@
 import React, { Component} from "react";
 import "./../css/Pinboard.css";
-import Notecard from "./Notecard.js"
-import AddNote from "./AddNote.js"
+import Notecard from "./Notecard.js";
+import AddNote from "./AddNote.js";
+import { connect } from "react-redux";
+import { fetchNotes, deleteNote, addNote } from './../actions.js'
 
 class Pinboard extends Component{
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    this.fetchNotes();
-  }
-
-  async addNote(){
-    const resp = await fetch('http://localhost:8080/addNote');
-    const dataPromise = await resp.json();
-    const payload = await dataPromise;
-    this.setState({
-      notes: Object.values(payload)
-    });
-  }
-
-  async deleteNote(noteId){
-    const resp = await fetch(`http://localhost:8080/deleteNote/${noteId}`);
-    const dataPromise = await resp.json();
-    const payload =  await dataPromise;
-    this.setState({
-      notes: Object.values(payload)
-    });
-  }
-
-  async fetchNotes(){
-    const resp = await fetch('http://localhost:8080/notes');
-    const dataPromise = await resp.json();
-    const payload = await dataPromise;
-    this.setState({
-      notes: Object.values(payload)
-    });
+    this.props.fetchNotes();
   }
 
   renderNotes(){
+    const notes = Object.values(this.props.notes);
     const {
-      notes
-    } = Object.values(this.props.notes);
+      deleteNote,
+      addNote
+    } = this.props;
 
     if (notes.length) {
       const notesList = notes.map((note, index) =>
         <Notecard
           key={`note-${index}`}
-          taskList={note.taskList}
           noteId={note.noteId}
-          deleteNote={(noteId) => this.deleteNote(noteId)}
+          deleteNote={(noteId) => deleteNote(noteId)}
         />
       );
-      notesList.push(<div key="add-list" className="add-note-wrapper"><AddNote showMsg={false} addNote={e => this.addNote(e)}/></div>);
+      notesList.push(<div key="add-list" className="add-note-wrapper"><AddNote showMsg={false} addNote={e => addNote(e)}/></div>);
       return notesList;
     } else {
-      return <div className="add-note-wrapper-empty"><AddNote showMsg={true} addNote={e => this.addNote(e)}/></div>;
+      return <div className="add-note-wrapper-empty"><AddNote showMsg={true} addNote={e => addNote(e)}/></div>;
     }
   }
 
@@ -71,4 +47,21 @@ class Pinboard extends Component{
   }
 }
 
-export default Pinboard;
+const mapStateToProps = (state) => {
+  return state;
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchNotes : () => {
+      dispatch(fetchNotes());
+    },
+    deleteNote : (noteId) => {
+      dispatch(deleteNote(noteId));
+    },
+    addNote : () => {
+      dispatch(addNote());
+    }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Pinboard);

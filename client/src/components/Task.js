@@ -24,8 +24,6 @@ class Task extends Component{
     return nextState.task.value !== inputDiv.innerHTML
   }
 
-
-
   render(){
     const {
       taskIndex,

@@ -1,42 +1,45 @@
-import { EDIT_NOTE, EDIT_PINBOARD } from 'constants/actions';
+import { EDIT_NOTE, EDIT_PINBOARD } from './constants/actions';
 
-async addTask(noteId){
+export function addTask(noteId){
   return async dispatch => {
     const resp = await fetch(`http://localhost:8080/addTask/${noteId}`);
     const dataPromise = await resp.json();
     const payload =  await dataPromise;
     dispatch({
       note: payload,
+      noteId:noteId,
       type: EDIT_NOTE
     });
   }
 }
 
-async editTask(taskIndex,status,text,noteId){
+export function editTask(taskIndex,status,text,noteId){
   return async dispatch => {
     const resp = await fetch(`http://localhost:8080/updateTask/${taskIndex}/${noteId}/${status}/${text}`);
     const dataPromise = await resp.json();
     const payload =  await dataPromise;
     dispatch({
       note: payload,
+      noteId:noteId,
       type: EDIT_NOTE
     });
   }
 }
 
-async deleteTask(taskIndex, noteId){
+export function deleteTask(taskIndex, noteId){
   return async dispatch => {
     const resp = await fetch(`http://localhost:8080/deleteTask/${taskIndex}/${noteId}`);
     const dataPromise = await resp.json();
     const payload =  await dataPromise;
     dispatch({
       note: payload,
+      noteId:noteId,
       type: EDIT_NOTE
     });
   }
 }
 
-async addNote(){
+export function addNote(){
   return async dispatch => {
     const resp = await fetch('http://localhost:8080/addNote');
     const dataPromise = await resp.json();
@@ -48,7 +51,7 @@ async addNote(){
   }
 }
 
-async deleteNote(noteId){
+export function deleteNote(noteId){
   return async dispatch => {
     const resp = await fetch(`http://localhost:8080/deleteNote/${noteId}`);
     const dataPromise = await resp.json();
@@ -60,7 +63,7 @@ async deleteNote(noteId){
   }
 }
 
-async fetchNotes(){
+export function fetchNotes(){
   return async dispatch => {
     const resp = await fetch('http://localhost:8080/notes');
     const dataPromise = await resp.json();

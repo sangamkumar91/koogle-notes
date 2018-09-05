@@ -1,49 +1,15 @@
 import React, { Component} from "react";
 import "./../css/Notecard.css";
 import Task from "./Task.js";
+import { connect } from "react-redux";
+import { addTask, editTask, deleteTask } from './../actions.js'
+
 
 class Notecard extends Component{
 
   constructor(props) {
     super(props);
-    this.state = {
-      taskList: props.taskList
-    };
   }
-
-  async addTask(noteId,text){
-    const resp = await fetch(`http://localhost:8080/addTask/${noteId}`);
-    const dataPromise = await resp.json();
-    const payload = await dataPromise;
-    this.setState({
-      taskList: payload.taskList
-    });
-  }
-
-  async editTask(taskIndex,status,text){
-    const {
-      noteId
-    } = this.props;
-    const resp = await fetch(`http://localhost:8080/updateTask/${taskIndex}/${noteId}/${status}/${text}`);
-    const dataPromise = await resp.json();
-    const payload =  await dataPromise;
-    this.setState({
-      taskList: payload.taskList
-    });
-  }
-
-  async deleteTask (taskIndex){
-    const {
-      noteId
-    } = this.props;
-    const resp = await fetch(`http://localhost:8080/deleteTask/${taskIndex}/${noteId}`);
-    const dataPromise = await resp.json();
-    const payload =  await dataPromise;
-    this.setState({
-      taskList: payload.taskList
-    });
-  }
-
 
   onDeleteNote(){
     const {
@@ -54,12 +20,15 @@ class Notecard extends Component{
     deleteNote(noteId);
   }
 
+  editTask = () => {
+    
+  }
+
   render(){
-    const {
-      taskList
-    } = this.state;
 
     const {
+      addTask,
+      taskList,
       noteId
     } = this.props;
 
@@ -76,13 +45,21 @@ class Notecard extends Component{
                 <Task
                   key={"key-"+index}
                   taskIndex={index}
-                  editTask={this.editTask.bind(this)}
-                  deleteTask={this.deleteTask.bind(this)}
+                  editTask={(taskIndex,status,text) => {
+                      const noteId = this.props.noteId;
+                      this.props.editTask(taskIndex,status,text, noteId);
+                    }
+                  }
+                  deleteTask={(index) => {
+                      const noteId = this.props.noteId;
+                      this.props.deleteTask(index, noteId);
+                    }
+                  }
                   task={task}
                 />
               )
             }
-            <button className="add-task-button" onClick={e => this.addTask(noteId)}>
+            <button className="add-task-button" onClick={(e) => addTask(noteId)}>
               <i className="material-icons font-large">add_box</i>
               <span className="font-large"></span>
             </button>
@@ -93,4 +70,23 @@ class Notecard extends Component{
   }
 }
 
-export default Notecard;
+const mapStateToProps = (state, myOwnProps) => {
+  const note = state.notes[myOwnProps.noteId];
+  return note;
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addTask: (noteId) => {
+      dispatch(addTask(noteId));
+    },
+    deleteTask: (index, noteId) => {
+      dispatch(deleteTask(index, noteId));
+    },
+    editTask: (taskIndex,status,text,noteId) => {
+      dispatch(editTask(taskIndex,status,text,noteId));
+    }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Notecard);

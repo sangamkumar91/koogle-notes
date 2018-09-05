@@ -1,4 +1,4 @@
-import { EDIT_NOTE,EDIT_PINBOARD } from 'constants/actions';
+import { EDIT_NOTE,EDIT_PINBOARD } from './constants/actions.js';
 const initialState = {
   notes : {}
 }
@@ -10,16 +10,23 @@ export default function (state, action) {
   }
 
   switch(action.type){
-    case EDIT_NOTE:
+    case EDIT_NOTE: {
       const note = action.note;
       const noteId = action.noteId;
       const notes = Object.assign({}, state.notes);
       notes[noteId] = note;
-      return {...state, notes};
-      break;
+      return {
+        ...state,
+        notes
+      };
+
+    }
     case EDIT_PINBOARD:
       const notes = action.notes;
-      return {...state, notes};
+      return {
+        ...state,
+        notes
+      };
       break;
     default:
       return state;
